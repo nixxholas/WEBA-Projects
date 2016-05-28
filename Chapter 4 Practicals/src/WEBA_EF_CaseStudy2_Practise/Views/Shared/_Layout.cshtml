@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiment</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/css/typesettings-1.1.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/noty_custom.css" />
+        <link rel="stylesheet" href="~/css/sticky_footer.css" />
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/noty/js/noty/jquery.noty.js"></script>
+        <script src="~/lib/moment/min/moment.min.js"></script>
+        <script src="~/lib/noty/js/noty/packaged/jquery.noty.packaged.js"></script>
+
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+
+</head>
+<body  style="margin-top:-70px;">
+
+    <!-- Wrap all page content here -->
+    <div id="wrap">
+
+  
+
+
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+        @RenderSection("scripts", required: false)
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Place sticky footer content here.</p>
+        </div>
+    </footer>
+
+
+
+
+</body>
+</html>
