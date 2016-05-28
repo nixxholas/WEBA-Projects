@@ -1,0 +1,6 @@
+F:\School\DIT 2nd Year\AJP\ExperimentLambda\ExperimentLambda\bin\Debug\ExperimentLambda.exe.config
+F:\School\DIT 2nd Year\AJP\ExperimentLambda\ExperimentLambda\bin\Debug\ExperimentLambda.exe
+F:\School\DIT 2nd Year\AJP\ExperimentLambda\ExperimentLambda\bin\Debug\ExperimentLambda.pdb
+F:\School\DIT 2nd Year\AJP\ExperimentLambda\ExperimentLambda\obj\Debug\ExperimentLambda.csprojResolveAssemblyReference.cache
+F:\School\DIT 2nd Year\AJP\ExperimentLambda\ExperimentLambda\obj\Debug\ExperimentLambda.exe
+F:\School\DIT 2nd Year\AJP\ExperimentLambda\ExperimentLambda\obj\Debug\ExperimentLambda.pdb
