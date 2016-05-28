@@ -1,0 +1,141 @@
+﻿
+	<div class="row">
+		<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+				<div class="panel-title">
+					Students who are taking Course <span id="courseAbbreviationTextBlock"></span>
+					<div class="btn-group pull-right">
+						<a asp-action="ExperimentViewCourseSummary" asp-controller="Courses" class="btn btn-primary btn-group-lg ">Back</a>
+					</div>
+				</div>
+				<div class="panel-info">
+					<br />
+					The JavaScript logic in this view consumes the <b>GetStudentListByCourse</b> Web API method in the Students Web API controller <b>object</b> to present the students who are associated to the selected course.<br />
+					<div class="text-danger" style="background-color:white"><b>Note</b><br />
+					Study how the course id is transmitted from the previous view to here, and how the course id is sent to the GetStudentListByCourse() method of the Students Web API controller object so that the correct result set can be consumed by the JavaScript logic here.</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Full Name</th>
+								<th>Admission Id</th>
+								<th>Mobile Contact</th>
+								<th>Course</th>
+							</tr>
+						</thead>
+						<tbody id="studentTableBody"></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	var g_courseId = getIdFromAddressBar();
+
+	function getIdFromAddressBar() {
+		var urlArray = window.location.href.split('/');
+		var id = urlArray[urlArray.length - 1];
+		return id;
+	};
+	loadStudentData();
+
+	function loadStudentData() {
+		//Note: jQuery.ajax(..) is also often written is $.ajax(..)
+		$loadStudentDataHandler = jQuery.ajax({
+			url: '/Api/Students/GetStudentListByCourse/' + g_courseId,
+			method: 'GET',
+			dataType: 'json',
+			cache: false,
+		});
+		$loadStudentDataHandler.done(function (data, textStatus, jqXHR) {
+			//This done method will
+			//The (data) input parameter automatically captures the response from the
+			//GetStudentListByCourse() API method
+
+			//I usually use the following code
+			//to inspect the returned result captured by the data input parameter
+			//from the web server.
+			console.log(data);
+
+			//After inspecting the data object with the console.log
+			//I have clear picture of the structure of the data object
+			var studentList = data.StudentList;
+			var studentId = '';
+			var fullName = '';
+			var admissionId = '';
+			var mobileContact = '';
+			var courseAbbreviation = '';
+			var $tableElement = null;
+			var $cellElement = null;
+			var $rowElement = null;
+			//-------- Find the table element -----------
+			//I am using the $tableElement variable
+			//to represent the found HTML element which has a matching id of studentTableBody
+			$tableBodyElement = $('#studentTableBody');
+			//Display the course abbreviation in the span element which I have planted at the top
+			//of the page.
+			$('#courseAbbreviationTextBlock').text(data.CourseAbbreviation);
+
+			//I want to build rows and cells (using tr and td HTML elements) so that
+			//I can display student name, email, mobile contact, admission id, date of birth information
+			//within the HTML table element, studentTableBody. Recall that, I have already asked the
+			//$tableBodyElement variable to represent (reference) the table element.
+
+			//-------- Begin creating <tr> and <td> HTML element ------
+			for (index = 0; index < studentList.length; index++) {
+				//Set this student variable to reference a student object
+				//within the studentList Array.
+				student = studentList[index];
+				//Copy out the student information
+				studentId = student.StudentId;
+				fullName = student.FullName;
+				mobileContact = student.MobileContact;
+				admissionId = student.AdmissionId;
+				courseAbbreviation = student.CourseAbbreviation;
+				//Create new HTML <tr> element.
+				//At the same time let the $rowElement variable to represent it.
+				$rowElement = $('<tr></tr>');
+				//Create the 1st cell element which display Full Name.
+				$cellElement = $('<td></td>', { text: fullName });
+				$rowElement.append($cellElement);
+				//Create the 2nd cell element which display Admission Id
+				$cellElement = $('<td></td>', { text: admissionId });
+				$rowElement.append($cellElement);
+				//Create the 3rd cell element which display Mobile Contact
+				$cellElement = $('<td></td>', { text: mobileContact });
+				$rowElement.append($cellElement);
+				//Create the 4th cell element which display Course Abbreviation
+				$cellElement = $('<td></td>', { text: courseAbbreviation });
+				$rowElement.append($cellElement);
+
+				//Insert the $rowElement into the table element represented by $tableElement.
+				$tableBodyElement.append($rowElement);
+				//----End of creating one row to display one student by using <tr> and <td> HTML element ---
+				//Proceed to the next student object in the studentList Array.
+			}//end of for loop.
+			noty({
+				text: data.Message,
+				layout: 'center',
+				type:'success',
+				template: '<div class="noty_message"><span class="noty_text"></span>'
+			});//end of noty()
+		}//end of JavaScript anonymous function
+	)//end of the done() method;
+	$loadStudentDataHandler.fail(function (data, textStatus, jqXHR) {
+
+			noty({
+				text: 'Ajax call has failed due to : ' + data.statusText, type: 'error',
+				layout: 'center',
+				template: '<div class="noty_message"><span class="noty_text"></span>'
+			});//end of noty()
+		})//end of $loadStudentDataHandler.fail()
+	}//end of loadStudentData();
+
+</script>
