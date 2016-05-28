@@ -1,0 +1,74 @@
+﻿<select id="courseIdInput">
+    <option value="0">--Select Course--</option>
+</select>
+
+<script>
+    function setupCourseListBox() {
+        var $dataCommunicationTracker = jQuery.ajax({
+            contentType: 'application/json',
+            method: 'get',
+            url: 'http://localhost:63079/API/Courses/GetCoursesForControls',
+        });
+        /**
+          Like what Mr Tan always said,
+          We define var so that we can allow the program
+          to automatically assign itself its variable type
+          and that we won't have to spend time to convert
+          variables here and there else it'll be a waste of lines
+    
+          So basically what jQuery.ajax does is that its using the method
+          GET, and the type of the content we're accessing is json
+          So then we'll GET the data from the url
+          which
+          would in turn be something like that
+    
+          [{
+          "CourseId" : 1,
+          "CourseAbbreviation": "DIT"
+          },
+          {
+            "CourseId": 2,
+            "CourseAbbreviation": "DBIT"
+            }, 
+            {
+            "CourseId": 3,
+            "CourseAbbreviation": "DISM"        
+            }
+        ]
+            
+            and var simply stores this chunk of text
+            into itself. 
+    
+            That's it, then we're ready to parse that shit.
+        **/
+        var $dataCommunicationTracker = jQuery.ajax({
+            contentType: 'application/json',
+            method: 'get',
+            // This is extremely important that you MUST
+            // understand this.
+            // If you actually obtain the RAW data from GetCoursesForControls,
+            // You'll be able to know why we're going to turn all
+            // of the data here into an array for us to convert into
+            // the dropdown options later.
+            url: 'http://localhost:63079/API/Courses/GetCoursesForControls',
+        });
+
+        /**
+        I have problems understanding this code as well,
+        But fear not because I will work on it.
+    
+        Basically it just does this if 
+        **/
+        $dataCommunicationTracker.done(function (data, textStatus, jqXHR) {
+            console.dir(data);
+            console.dir(textStatus);
+            console.dir(jqXHR);
+        });
+
+        $dataCommunicationTracker.fail(function (data, textStatus, jqXHR) {
+            console.dir(data);
+            console.dir(textStatus);
+            console.dir(jqXHR);
+        });
+    } //End of setupCourseListBox() function
+</script>

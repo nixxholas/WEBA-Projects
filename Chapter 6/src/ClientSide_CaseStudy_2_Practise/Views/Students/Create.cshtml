@@ -1,0 +1,141 @@
+﻿<!--
+    Edited by Nicholas
+-->
+
+<h1>Add Student Record</h1>
+<div>
+    <!-- main div element to contain all the web form interface elements-->
+    <div>
+        <label for="fullNameInput">Full Name</label>
+        <input type="text" id="fullNameInput" maxlength="100"
+               placeholder="Full name" value="" />
+    </div>
+    <div>
+        <label for="admissionIdInput">Admission Id</label>
+        <input type="text" id="admissionIdInput" maxlength="10"
+               placeholder="Admission Id" value="" />
+    </div>
+    <div>
+        <label for="emailInput">Email</label>
+        <input type="text" id="emailInput" maxlength="50"
+               placeholder="Email" value="" />
+    </div>
+    <div>
+        <label for="mobileContactInput">Mobile Contact</label>
+        <input type="text" id="mobileContactInput" maxlength="10"
+               placeholder="Mobile contact" />
+    </div>
+    <div>
+        <label for="dateOfBirthInput">Date of Birth</label>
+        <input type="text" id="dateOfBirthInput" maxlength="11"
+               placeholder="Date of Birth" />
+    </div>
+    <!--
+    FOR PRACTICAL 6 PART 2 ONLY
+
+        The courseIdInput Dropdown box is a bad example as the options
+        are all hardcoded. We'll now perform a database-driven approach
+        to create this dropdown.
+
+    -->
+    <div>
+        <label for="courseIdInput">Course</label>
+        <select id="courseIdInput">
+            <option value="0">--Select Course--</option>
+            <option value="1">DIT</option>
+            <option value="2">DBIT</option>
+            <option value="3">DISM</option>
+        </select>
+    </div>
+    <div>
+        <div style="float:right;">
+            <!--avoid using inline style-->
+            <input type="button" value="Save" id="saveButton"
+                   class="btn btn-primary" />
+            <a class="btn btn-default" href="/Students">Cancel</a>
+        </div>
+    </div>
+
+
+</div>
+<!--End of main div element to contain all
+    the web form interface elements-->
+
+<script>
+    setupCourseListBox();
+    function setupCourseListBox() {
+        var $dataCommunicationTracker = jQuery.ajax({
+            contentType: 'application/json',
+            method: 'get',
+            url: 'http://localhost:63079/API/Courses/GetCoursesForControls',
+        });
+        /**
+          Like what Mr Tan always said,
+          We define var so that we can allow the program
+          to automatically assign itself its variable type
+          and that we won't have to spend time to convert
+          variables here and there else it'll be a waste of lines
+
+          So basically what jQuery.ajax does is that its using the method
+          GET, and the type of the content we're accessing is json
+          So then we'll GET the data from the url
+          which
+          would in turn be something like that
+
+          [{
+          "CourseId" : 1,
+          "CourseAbbreviation": "DIT"
+          },
+          {
+            "CourseId": 2,
+            "CourseAbbreviation": "DBIT"
+            },
+            {
+            "CourseId": 3,
+            "CourseAbbreviation": "DISM"
+            }
+        ]
+
+            and var simply stores this chunk of text
+            into itself.
+
+            That's it, then we're ready to parse that shit.
+        **/
+        var $dataCommunicationTracker = jQuery.ajax({
+            contentType: 'application/json',
+            method: 'get',
+            // This is extremely important that you MUST
+            // understand this.
+            // If you actually obtain the RAW data from GetCoursesForControls,
+            // You'll be able to know why we're going to turn all
+            // of the data here into an array for us to convert into
+            // the dropdown options later.
+            url: 'http://localhost:63079/API/Courses/GetCoursesForControls',
+        });
+
+        /**
+        I have problems understanding this code as well,
+        But fear not because I will work on it.
+
+        Basically it just does this if
+        **/
+        $dataCommunicationTracker.done(function (data, textStatus, jqXHR) {
+            var $courseIdInputElement = jQuery('#courseIdInput');
+            var $optionElement = null;
+
+            for (index = 0; index < data.length; index++) {
+                oneCourse = data[index];
+                $optionElement = jQuery('<option>')
+                                    .text(oneCourse.CourseAbbreviation)
+                                    .attr('value', oneCourse.CourseId);
+                $courseIdInputElement.append($optionElement);            }
+        });
+
+        $dataCommunicationTracker.fail(function (data, textStatus, jqXHR) {
+            console.dir(data);
+            console.dir(textStatus);
+            console.dir(jqXHR);
+        });
+
+    } //End of setupCourseListBox() function
+</script>

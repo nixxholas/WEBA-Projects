@@ -1,0 +1,93 @@
+﻿<!--
+    Please take note!
+    
+    The reason why we need the folder to be called ExperimentJavaScript
+    is that we need it to be pointed to the controller we've created earlier,
+    which is called ExperimentJavaScriptController.    
+
+-->
+<select id="courseIdInput">    
+    <option value="0">--Select Course--s</option>
+</select>
+<script>
+    //Use var keyword to tell JavaScript
+    //you want to declare a variable, data.
+    //Use { } to tell the JavaScript engine that you want to
+    //define an object.
+    //Use property name : value technique to define two sets of
+    //data.
+    //You are creating an object of information.
+    var data = {
+        CourseId: '1',
+        CourseAbbreviation: 'DIT'
+    };
+    console.dir(data); //Inspect the data object of information content
+    //Try to access the data object's CourseId property value
+    console.dir(data.CourseId);
+    //Try to access the data object's CourseAbbreviation property value
+    console.dir(data.CourseAbbreviation);
+
+    //On the right hand side of the assignment operator:
+    //Ask jQuery() to find the <SELECT> element by id:
+    $courseIdInputElement = jQuery('#courseIdInput');
+    var $optionElement = null;
+    //
+    //  THIS IS EXTREMELY CRUCIAL PLEASE READ DON'T BE LAZY YOU CAN DO IT
+    //
+    // <-- START OF MR TAN'S COMMENT -->
+    //On the right hand side of the assignment operator:
+    //Ask jQuery() to create a new <option> element by supplying a string
+    //'<option>'. Note that, jQuery('<option>') will turn into a "jQuery object"
+    //equipped with powerful methods such as text() and attr().
+    //Therefore, I can "continue" calling text() and attr() to supply more information
+    //to setup the new <option> element.
+    //After everything has been executed on the right hand side, I have defined
+    //an <option> element and I need a variable to hold it. Therefor I assigned
+    //$optionElement to do the job.
+    // <-- END OF MR TAN'S COMMENT -->
+    //Basically, the .text('COOKING') is what the user can see
+    //and .attr('value', '888888') is basically what the COOKING
+    //is at the back of the whole client.
+    //jQuery('<option>') is for jQuery to know that "hey, time for me
+    //to create an option element for my user." then,
+    //jQuery be like "DANG, gotta set the text of the option to be COOKING
+    //hmmm. I also have have to set the value of this option to be what I've been
+    //told from .attr." 
+    //
+    //For your info,
+    //attr is this:
+    //
+    //Attribute values are strings with the exception of a few attributes such as value and tabindex.
+    //
+    //  I've got some redundant info for you as well
+    //
+    // Using jQuery's .attr() method to get the value of an element's attribute has two main benefits:
+    //
+    // Convenience: It can be called directly on a jQuery object and chained to other jQuery methods.
+    // Cross-browser consistency: The values of some attributes are reported inconsistently across browsers, 
+    // and even across versions of a single browser. The .attr() method reduces such inconsistencies.
+    //
+
+
+
+    //-------- THIS IS WHAT WE'VE DONE A STEP EARLIER. ----------------
+    //$optionElement = jQuery('<option>').text('COOKING').attr('value', '888888');
+
+
+
+    // I purposely made a gap for the code above to let you know what I did
+    // 
+    // The code below is for Practical 2 part 2 of Listing 4.
+    $optionElement = jQuery('<option>').text('DIT').attr('value', '1');
+    //Finally I call the append() method and pass the $optionElement into it.
+    //The append() method belongs to the $courseIdInputElement which represents
+    //the actual <SELECT> element. As a result, a <OPTION> element become a "child"
+    //of the <SELECT> element.
+    $courseIdInputElement.append($optionElement);
+    // So in order to add more elements into the dropdown box, we have to 
+    // repeat the two lines above
+    $optionElement = jQuery('<option>').text('DBIT').attr('value', '2');
+    $courseIdInputElement.append($optionElement);
+    $optionElement = jQuery('<option>').text('DISM').attr('value', '3');
+    $courseIdInputElement.append($optionElement);
+</script>

@@ -1,0 +1,132 @@
+﻿<!--
+    Edited by Nicholas    
+-->
+
+<h1>Add Student Record</h1>
+<div>
+    <!-- main div element to contain all the web form interface elements-->
+    <div>
+        <label for="fullNameInput">Full Name</label>
+        <input type="text" id="fullNameInput" maxlength="100"
+               placeholder="Full name" value="" />
+    </div>
+    <div>
+        <label for="admissionIdInput">Admission Id</label>
+        <input type="text" id="admissionIdInput" maxlength="10"
+               placeholder="Admission Id" value="" />
+    </div>
+    <div>
+        <label for="emailInput">Email</label>
+        <input type="text" id="emailInput" maxlength="50"
+               placeholder="Email" value="" />
+    </div>
+    <div>
+        <label for="mobileContactInput">Mobile Contact</label>
+        <input type="text" id="mobileContactInput" maxlength="10"
+               placeholder="Mobile contact" />
+    </div>
+    <div>
+        <label for="dateOfBirthInput">Date of Birth</label>
+        <input type="text" id="dateOfBirthInput" maxlength="11"
+               placeholder="Date of Birth" />
+    </div>
+    <!--
+    FOR PRACTICAL 6 PART 2 ONLY
+        
+        The courseIdInput Dropdown box is a bad example as the options
+        are all hardcoded. We'll now perform a database-driven approach
+        to create this dropdown.
+            
+    -->
+    <div>
+        <label for="courseIdInput">Course</label>
+        <select id="courseIdInput">
+            <option value="0">--Select Course--</option>
+            <option value="1">DIT</option>
+            <option value="2">DBIT</option>
+            <option value="3">DISM</option>
+        </select>
+    </div>
+    <div>
+        <div style="float:right;">
+            <!--avoid using inline style-->
+            <input type="button" value="Save" id="saveButton"
+                   class="btn btn-primary" />
+            <a class="btn btn-default" href="/Students">Cancel</a>
+        </div>
+    </div>
+
+
+</div> <!--End of main div element to contain all
+           the web form interface elements-->
+<script>
+    //Defining an object constructor (Pg.23 Chapter 6)
+    //This function is basically a constructor for the object for Student.cs
+    // ------------ Java Iteration -----------------
+    //
+    // public Student (String inFullName, String, inAdmissionId, String inEmail
+    //       String inMobileContact, String inDateOfBirth, inCourseId) {
+    //      this.FullName = inFullName;
+    //      this.AdmissionId = inAdmissionId;
+    //      this.Email = inEmail;
+    //      this.MobileContact = inMobileContact;
+    //      this.DateOfBirth = inDateOfBirth; // I'm supposed to add the datetime 
+    //                                        // conversion method here but i didn't
+    //      this.CourseId = Integer.ParseInt(inCourseId);
+    // }
+    function WebFormData(inFullName, inAdmissionId, inEmail,
+        inMobileContact, inDateOfBirth, inCourseId){
+        this.FullName = inFullName;
+        this.AdmissionId = inAdmissionId;
+        this.Email = inEmail;
+        this.MobileContact = inMobileContact;
+        this.DateOfBirth = inDateOfBirth;
+        this.CourseId = inCourseId;
+    }
+
+    // When the user CLICKS (you can see the line below, its there) on the
+    // SAVE button, this function will be executed.
+    // As simple as that, it will store all those values into their own variables
+    $('#saveButton').on('click', function() {
+        var collectedFullName = $('#fullNameInput').val();
+        var collectedMobileContact = $('#mobileContactInput').val();
+        var collectedEmail = $('#emailInput').val();
+        var collectedDateOfBirth = $('#dateOfBirthInput').val();
+        var collectedAdmissionId = $('#admissionIdInput').val();
+        var collectedCourseId = $('#courseIdInput').val();
+        //Use the object constructor (WebFormData) to construct
+        //an object of information (Pg. 20 of Chapter 6)
+        // In case you're lazy to search, an object of information is basically
+        // an object of Student.cs. This will call the constructor that we have
+        // created earlier from line 65 to 72.
+        var webFormData = new WebFormData(collectedFullName,
+            collectedAdmissionId,
+            collectedEmail, collectedMobileContact,
+            collectedDateOfBirth, collectedCourseId);
+        //Convert the object into a string. The string contains the
+        //Student data in JSON structure. (Pg.26 Chapter 6)
+        //Converts the object into a RAW format, just like how we
+        //used postman in earlier practicals to retrieve information.
+        var webFormDataInString = JSON.stringify(webFormData);
+        //Use ajax() which belongs to jQuery object to
+        //build a HTTP POST request to send the student
+        //data to the business logic layer. Pg 33 Chapter 6
+        $saveStudentHandler = jQuery.ajax({
+            type: 'POST',
+            url: '/API/Students/',
+            dataType: 'json',
+            contentType: 'application/json;',
+            data: "'" + webFormDataInString + "'"
+        })
+        $saveStudentHandler.done(function(data, textStatus, jqXHR) {
+            noty({ text: data.Message, layout: 'center' });
+        });//End of $saveStudentHandler.done()
+        $saveStudentHandler.fail(function(data, textStatus, jqXHR) {
+            noty({
+                text: data.responeJSON.Message, type: 'error',
+                layout: 'center',
+                template: '<div class="noty_message"><span class="noty_text"></span>'
+            });//end of noty()
+        }); //end of $saveStudentHandler.fail()
+    });//end of $('#saveButton').on('click', anonymous function)
+</script>

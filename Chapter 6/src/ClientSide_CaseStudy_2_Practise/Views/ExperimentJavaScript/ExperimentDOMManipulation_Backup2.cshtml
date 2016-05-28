@@ -1,0 +1,51 @@
+﻿<!--
+    We still need to have a default value
+    So we'll recreate the box with the first option
+    which will be 0    
+-->
+<select id="courseIdInput">
+    <option value="0">--Select Option --</option>
+</select>
+
+<script>
+    /**
+    Create a variable called data,
+    which will store an array of of each course.
+
+    Notice that we are hardcoding this array, the dynamic version
+    which incorporates predefined data will be in the next iteration of
+    this cshtml.
+    */
+    var data = [{
+        CourseId: '1',
+        CourseAbbreviation: 'DIT'
+    }, {
+        CourseId: '2',
+        CourseAbbreviation: 'DBIT'
+    }, {
+        CourseId: '3',
+        CourseAbbreviation: 'DISM'
+    }]
+
+    // *Activate* jQuery to copy whatever is in
+    // $courseIdInputElement into the dropdown box,
+    // #courseIdInput.
+    $courseIdInputElement = jQuery('#courseIdInput');
+
+    // Create the option element first and declare it as null
+    var $optionElement = null;
+
+    // For each option in the array of data
+    for (index = 0; index < data.length; index++) {
+        oneCourse = data[index]; //Define the array element into oneCourse
+        // We have done this previously, basically now that
+        // this chunk is dynamic.
+        $optionElement = jQuery('<option>')
+               .text(oneCourse.CourseAbbreviation)
+               .attr('value', oneCourse.CourseId);
+        // Done this before as well, toss what we've
+        // pasted in optionElement and adding it to the
+        // dropdown element
+        $courseIdInputElement.append($optionElement);
+    }
+</script>
