@@ -1,7 +1,0 @@
-﻿ 
-	The code below is used when I need to run the project on office laptop
-
-	           optionsBuilder.UseSqlServer(@"Server=IT-NB147067\SQLEXPRESS;Database=ExperimentOneToManyEntitiesDB;Trusted_Connection=True;MultipleActiveResultSets=True");
-  
-		
-		There is a style sheet file, typesettings-1.1.css. I obtained it from http://mikemai.net/typesettings/index.html so that I can quickily focus on preparing the learning instructions content instead of figuring out the typography (which is important in any web applications development).         
