@@ -1,0 +1,72 @@
+﻿<h1>Entity Framework Case Study 1 <font color="hotpink">For Practise</font></h1>
+<h2>Sample working project to supplement Chapter 2 Datatabase Layer Development</h2>
+<div class="row">
+    <div class="col-md-12">
+        <article class="typesettings sans-serif" style="font-size:12pt;">
+            <ul>
+            <li>This project has <span style="font-weight:bold;color:white;background-color:hotpink">project.json</span> setup with the necessary packages which supports <b>Code First Database Layer Development Approach.</b></li>
+            <li>The project should be stored in a short path directory location. E.g. <b>D:\WEBA</b></li>
+            <li>The project uses the database <b>WEBA_EF_CaseStudyDB_1</b></li>
+
+            </ul>
+            <section>
+                <h2 style="color:hotpink">Practise Outcome</h2>
+                <hr />
+                <table class="table table-responsive">
+                    <tr>
+                        <td style="vertical-align:top"><b>1</b></td>
+                        <td>
+                            <div>
+                                <ul>
+                                    <li>Able to build <b>domain classes</b> (e.g. Company) and transform it into an Entity model using Code First Approach in ApplicationDbContext class</li>
+                                    <li>
+                                        Able to use <b>dnx ef migrations add setupdb</b> command in the Command Prompt window to create <b>migration files</b>
+                                        <img src="~/images/Outcome_MigrationFiles.jpg" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:top"><b>2</b></td>
+                        <td>Able to use EntityFramework's FluentAPI to define the characteristics of Company entity</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:top"><b>3</b></td>
+                        <td>Able to prepare <b>DataSeeder</b> class file, code the Migration and Data Seeding logic in the <b>SeedData()</b> method and finally attach SeedData() method to the web application</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:top"><b>4</b></td>
+                        <td>
+                            Able to modify the Startup class to tell the web project that it needs to <ul>
+                                <li>Work with EntityFramework and the ApplicationDbContext which represents the database</li>
+                                <li>Call SeedData method() to begin Migration and Seeding operations</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                </table>
+            </section>
+            </article>
+            <article  class="typesettings sans-serif" style="font-size:12pt;">
+            <section>
+                <h2 style="color:hotpink">Setup Instructions</h2>
+                <ul>
+                    <li>Prepare a database with name :  <font class="font-highlight">WEBA_EF_CaseStudyDB_1</font> <br />
+                    <img src="~/images/CreateEmptyDatabase.jpg" /></li>
+                    <li>Your web project should be stored at :  <font class="font-highlight">D:\WEBA</font> <br />
+                        <img src="~/images/ProjectStorageLocation.jpg" />
+                    </li>
+                    <li>
+                        Visual Studio (Use <font color="yellow">Extensions and Updates option</font>) has been setup with the extension to support calling Command Prompt from IDE environment.<br />
+                        <br />
+                        <img src="~/images/SetupVisualStudioExtensions_ForCommandPromptWindow.jpg" />
+                        <a href="https://youtu.be/BiIxaErUEeI" >YouTube Reference for Setting up Command Window Extension</a>
+                    </li>
+                </ul>
+            </section>
+        </article>
+   
+       </div> <!-- end of div element with class col-lg-12-->
+</div><!-- end of div element with class row-->
+

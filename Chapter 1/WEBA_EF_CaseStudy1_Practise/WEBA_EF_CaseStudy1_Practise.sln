@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8070450F-AFB5-4182-944D-529C2888F95C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77DA5E7B-2E4C-442B-BC1E-86CB44A61322}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WEBA_EF_CaseStudy1_Practise", "src\WEBA_EF_CaseStudy1_Practise\WEBA_EF_CaseStudy1_Practise.xproj", "{6CC1B4B3-0465-4848-89EB-5C3171C17798}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CC1B4B3-0465-4848-89EB-5C3171C17798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CC1B4B3-0465-4848-89EB-5C3171C17798}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CC1B4B3-0465-4848-89EB-5C3171C17798}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CC1B4B3-0465-4848-89EB-5C3171C17798}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6CC1B4B3-0465-4848-89EB-5C3171C17798} = {8070450F-AFB5-4182-944D-529C2888F95C}
+	EndGlobalSection
+EndGlobal
